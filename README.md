@@ -6,7 +6,7 @@ This is a time-lapse software created for a project in ECEN 5623 - Real-Time Emb
 
 Subsets of the program are displayed in separate folders.
 
-* video_capture - Uses Linux's v4l2 to capture JPEG images from a MJPEG stream
+* [video_capture](https://github.com/slockwoo/Time-Lapse/tree/master/video_capture) - Uses Linux's v4l2 to capture JPEG images from a MJPEG stream
 and saves them to files.
-* decompress_jpeg - Decodes a JPEG image into an RGB image.
-* zlib_compression - Compresses a RGB image using zlib.
+* [decompress_jpeg](https://github.com/slockwoo/Time-Lapse/tree/master/decode_jpeg) - Decodes a JPEG image into an RGB image.
+* [zlib_compression](https://github.com/slockwoo/Time-Lapse/tree/master/zlib_compression) - Compresses a RGB image using zlib.
