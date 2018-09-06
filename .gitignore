@@ -1,0 +1,4 @@
+capture
+*.o
+frames/
+oprofile_data
