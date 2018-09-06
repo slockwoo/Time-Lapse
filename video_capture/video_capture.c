@@ -15,8 +15,6 @@
 #include <poll.h>
 
 
-
-
 /**
 Stores the location and length of a memory-mapped frame.
 */
@@ -49,7 +47,7 @@ int initialize() {
     int rc;
 
     // Open desired streaming device.
-    fds.fd = open("/dev/video1", O_RDWR);
+    fds.fd = open("/dev/video0", O_RDWR);
     if (fds.fd == -1) {
         perror("Opening video device");
         return -1;
@@ -143,7 +141,7 @@ int initialize() {
     // This is where we can do what we want with the frame. Let's save it
     // to a file.
     FILE *file;
-    file = fopen("./frames/frame_init.jpeg", "wb");
+    file = fopen("../frames/jpeg/frame_init.jpeg", "wb");
     fwrite(buffered_camera[buf.index].start, sizeof(unsigned char), buf.bytesused, file);
     fclose(file);
     // #######################################################################
@@ -190,7 +188,7 @@ int loop() {
         // ###################################
         // This is where we can do what we want with the frame. Let's save it
         // to a file.
-        sprintf(filename, "./frames/frame_%04d.jpeg", i);
+        sprintf(filename, "../frames/jpeg/frame_%04d.jpeg", i);
         file = fopen(filename, "wb");
         fwrite(buffered_camera[buf.index].start, sizeof(unsigned char), buf.bytesused, file);
         fclose(file);

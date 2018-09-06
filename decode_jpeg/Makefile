@@ -3,27 +3,27 @@ LIB_DIRS =
 CC=gcc
 
 CDEFS= -D _GNU_SOURCE -Wall
-CFLAGS= -g -O0 $(INCLUDE_DIRS) $(CDEFS)
-LIBS=
+CFLAGS= -g -O3 $(INCLUDE_DIRS) $(CDEFS)
+LIBS= -lturbojpeg
 CPPLIBS=
 
 HFILES=
 CFILES=
-CPPFILES= video_capture.c
+CPPFILES= decode_jpeg.c
 
 SRCS= ${HFILES} ${CFILES}
 CPPOBJS= ${CPPFILES:.c=.o}
 
-all:	video_capture
+all:	decode_jpeg
 
 clean:
 	-rm -f *.o *.d
-	-rm -f v4l2_to_memory
+	-rm -f decode_jpeg
 
 distclean:
 	-rm -f *.o *.d
 
-video_capture: video_capture.o
+decode_jpeg: decode_jpeg.o
 	$(CC) $(LDFLAGS) $(CFLAGS) -o $@ $@.o $(CPPLIBS) $(LIBS)
 
 depend:

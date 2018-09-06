@@ -4,26 +4,26 @@ CC=gcc
 
 CDEFS= -D _GNU_SOURCE -Wall
 CFLAGS= -g -O0 $(INCLUDE_DIRS) $(CDEFS)
-LIBS=
+LIBS= -lz
 CPPLIBS=
 
 HFILES=
 CFILES=
-CPPFILES= video_capture.c
+CPPFILES= zlib_compression.c
 
 SRCS= ${HFILES} ${CFILES}
 CPPOBJS= ${CPPFILES:.c=.o}
 
-all:	video_capture
+all:	zlib_compression
 
 clean:
 	-rm -f *.o *.d
-	-rm -f v4l2_to_memory
+	-rm -f zlib_compression
 
 distclean:
 	-rm -f *.o *.d
 
-video_capture: video_capture.o
+zlib_compression: zlib_compression.o
 	$(CC) $(LDFLAGS) $(CFLAGS) -o $@ $@.o $(CPPLIBS) $(LIBS)
 
 depend:

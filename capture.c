@@ -28,7 +28,7 @@
 #define HEADER_SIZE 1024
 
 #define TARGET_ADDRESS "192.168.137.2/Documents/ECEN5623/stream_mjpeg/frames/"
-#define CREDENTIALS "shane:Go0b3r@#"
+#define CREDENTIALS "username:password"
 // #define TARGET_ADDRESS "192.168.137.3/frames/"
 // #define CREDENTIALS "debian:temppwd"
 // #define TARGET_ADDRESS "192.168.137.4/Documents/EX06/v4l2_project/frames/"
@@ -871,11 +871,15 @@ void *compress_frames(void *args) {
             compression_mq_size--;
             mq_msg_int = atoi(mq_msg);
             index = mq_msg_int % frame_buffer_size;
+            // Dynamically adjust compression level based on how full the message
+            // queue is. More full equals lower compression level.
+            // This is to find a compression level that is as high as possible
+            // without allowing the message queue to fill up.
             compression_level = 9.0*(1.0 - (float)compression_mq_size/mq_attr.mq_maxmsg);
             buffered_frame[index].frame[2].size = compressBound(buffered_frame[index].frame[1].size);
             rc = compress2((Bytef *)buffered_frame[index].frame[2].data, (uLongf *)(&buffered_frame[index].frame[2].size), (const Bytef *)buffered_frame[index].frame[1].data, (uLong)buffered_frame[index].frame[1].size, compression_level);
             if (rc == Z_BUF_ERROR) printf("Z_BUF_ERROR error\n");
-            if (res == Z_MEM_ERROR) printf("Z_MEM_ERROR error\n");
+            if (rc == Z_MEM_ERROR) printf("Z_MEM_ERROR error\n");
             // Write frame to file on remote machine via network transfer
             if (write_file) {
                 save_image(index, mq_msg_int);

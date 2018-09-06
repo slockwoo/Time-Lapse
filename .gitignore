@@ -1,7 +1,7 @@
 capture
 *.o
-frames/
 oprofile_data
 
 video_capture/video_capture
-decompress_jpeg/decompress_jpeg
+video_capture/frames
+decode_jpeg/decode_jpeg
