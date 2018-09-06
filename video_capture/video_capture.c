@@ -1,3 +1,6 @@
+// This program demonstrates capturing frames from a MJPEG video stream (camera)
+// using v4l2.
+
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -46,7 +49,7 @@ int initialize() {
     int rc;
 
     // Open desired streaming device.
-    fds.fd = open("/dev/video0", O_RDWR);
+    fds.fd = open("/dev/video1", O_RDWR);
     if (fds.fd == -1) {
         perror("Opening video device");
         return -1;

@@ -8,3 +8,4 @@ Subsets of the program are displayed in separate folders.
 
 * video_capture - Uses Linux's v4l2 to capture JPEG images from a MJPEG stream
 and saves them to files.
+* decompress_jpeg - Decodes a JPEG image into an RGB image. 
