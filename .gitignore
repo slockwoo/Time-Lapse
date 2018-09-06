@@ -2,3 +2,5 @@ capture
 *.o
 frames/
 oprofile_data
+
+video_capture/video_capture

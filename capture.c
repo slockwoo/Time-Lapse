@@ -381,7 +381,7 @@ int initialize() {
         return -1;
     }
 
-    // Setup video capture format
+    // Setup video capture format for MJPEG.
     fmt.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     fmt.fmt.pix.width = hres;
     fmt.fmt.pix.height = vres;
