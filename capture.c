@@ -194,8 +194,6 @@ static size_t read_callback(void *ptr, size_t size, size_t nmemb, void *userp) {
     upload->data += copylen;
     upload->size -= copylen;
     return copylen;
-
-    return 0;
 }
 
 /**

@@ -5,12 +5,16 @@
 #include <stdio.h>
 #include <zlib.h>
 
+// Verify the resolution of your images.
+#define WIDTH 640
+#define HEIGHT 480
+
 
 int main(int argc, char** argv) {
     int rc;
     FILE *file;
-    int width = 640;
-    int height = 480;
+    int width = WIDTH;
+    int height = HEIGHT;
     char filename[128];
     unsigned char rgb[width*height*3+128];
     unsigned char zlib[width*height*3+128];
@@ -27,7 +31,7 @@ int main(int argc, char** argv) {
     // The last number is the compression level. It can be anywhere from 0-9
     // where 0 is no compression and 9 is maximum compression. The higher the
     // compression, the smaller the zlib image, but the longer it takes.
-    rc = compress2((Bytef *)zlib, (uLongf *)(&size), (const Bytef *)rgb, (uLong)(sizeof(unsigned char)*width*height*3+128), 1);
+    compress2((Bytef *)zlib, (uLongf *)(&size), (const Bytef *)rgb, (uLong)(sizeof(unsigned char)*width*height*3+128), 1);
 
     // And that's it. We compressed an RGB into a zlib file.
 
@@ -35,7 +39,7 @@ int main(int argc, char** argv) {
     // I don't know what the standard naming convention is but appending .zlib
     // to the end of the file seems to do the trick for me.
     file = fopen("../frames/zlib/frame_init.ppm.zlib", "wb");
-    rc = fwrite(zlib, sizeof(unsigned char), size, file);
+    fwrite(zlib, sizeof(unsigned char), size, file);
     fclose(file);
 
     // I included a decompression script called 'decompress.sh'. It will
@@ -58,11 +62,11 @@ int main(int argc, char** argv) {
         fclose(file);
 
         size = compressBound(rc);
-        rc = compress2((Bytef *)zlib, (uLongf *)(&size), (const Bytef *)rgb, (uLong)(sizeof(unsigned char)*width*height*3+128), 9);
+        compress2((Bytef *)zlib, (uLongf *)(&size), (const Bytef *)rgb, (uLong)(sizeof(unsigned char)*width*height*3+128), 9);
 
         sprintf(filename, "../frames/zlib/frame_%04d.ppm.zlib", i);
         file = fopen(filename, "wb");
-        rc = fwrite(zlib, sizeof(unsigned char), size, file);
+        fwrite(zlib, sizeof(unsigned char), size, file);
         fclose(file);
     }
 

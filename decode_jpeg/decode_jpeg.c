@@ -1,18 +1,19 @@
 // This program demonstrates decoding a JPEG image into a RGB image using
 // turbo-jpeg.
 
-
 #include <stdio.h>
-#include <errno.h>
 #include <turbojpeg.h>
 #include <string.h>
 
+// Verify the resolution of your images.
+#define WIDTH 640
+#define HEIGHT 480
 
 
 int main(int argc, char** argv) {
     int rc;
-    int width = 640;
-    int height = 480;
+    int width = WIDTH;
+    int height = HEIGHT;
     char header[128];
     char filename[128];
     unsigned char jpeg[width*height*3];
@@ -25,7 +26,7 @@ int main(int argc, char** argv) {
 
     // We'll load a JPEG file from storage to decode.
     file = fopen("../frames/jpeg/frame_init.jpeg", "rb");
-    rc = fread(jpeg, sizeof(unsigned char), 640*480*3, file);
+    rc = fread(jpeg, sizeof(unsigned char), width*height*3, file);
     fclose(file);
 
     // Gather header information from file.
@@ -54,7 +55,7 @@ int main(int argc, char** argv) {
     // Save the file so we can view it. Feel free to view the image in a text
     // editor.
     file = fopen("../frames/ppm/frame_init.ppm", "wb");
-    rc = fwrite(rgb, sizeof(unsigned char), 640*480*3, file);
+    fwrite(rgb, sizeof(unsigned char), width*height*3, file);
     fclose(file);
 
 
@@ -63,7 +64,7 @@ int main(int argc, char** argv) {
     for (int i = 0; i < 10; i++) {
         sprintf(filename, "../frames/jpeg/frame_%04d.jpeg", i);
         file = fopen(filename, "rb");
-        rc = fread(jpeg, sizeof(unsigned char), 640*480*3, file);
+        rc = fread(jpeg, sizeof(unsigned char), width*height*3, file);
         fclose(file);
 
         tjDecompressHeader2(_jpegDecompressor, jpeg, rc, &width, &height, &jpegSubsamp);
@@ -75,7 +76,7 @@ int main(int argc, char** argv) {
 
         sprintf(filename, "../frames/ppm/frame_%04d.ppm", i);
         file = fopen(filename, "wb");
-        rc = fwrite(rgb, sizeof(unsigned char), 640*480*3, file);
+        fwrite(rgb, sizeof(unsigned char), width*height*3, file);
         fclose(file);
     }
 
