@@ -22,4 +22,4 @@ Subsets of the program are displayed in separate folders.
 and saves them to files.
 * [decode_jpeg](https://github.com/slockwoo/Time-Lapse/tree/master/decode_jpeg) - Decodes a JPEG image into an RGB image.
 * [zlib_compression](https://github.com/slockwoo/Time-Lapse/tree/master/zlib_compression) - Compresses an RGB image using zlib.
-* [curl_tranfer](https://github.com/slockwoo/Time-Lapse/tree/master/curl_transfer) - Transfer a file to a target machine via FTP on libcurl.
+* [curl_transfer](https://github.com/slockwoo/Time-Lapse/tree/master/curl_transfer) - Transfer a file to a target machine via FTP on libcurl.
