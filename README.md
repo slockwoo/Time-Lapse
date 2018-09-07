@@ -11,8 +11,8 @@ sudo ./capture -f 1 -F 10 -t 3 -w -V
 sudo is required on Linux to create real-time threads which this program uses.
 This command will capture 10 frames at 1 Hz. It will use all 3 threads, so it
 will capture a JPEG image, decode it to PPM, then compress it to zlib. It will
-transfer the images via FTP to the target machine, and it will print the frames
-captured every second.
+transfer the images via FTP to the target machine, and it will print the number
+of frames captured every second.
 
 ### Subsets
 
